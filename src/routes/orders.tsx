@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { StickerDot, statusDot, statusLabel } from "@/components/ui/sticker-dot";
 import {
   Dialog,
   DialogContent,
@@ -28,7 +28,6 @@ import {
   Package,
   Truck,
   Store,
-  CreditCard,
   MapPin,
   Calendar,
   Hash,
@@ -38,21 +37,6 @@ import {
 export const Route = createFileRoute("/orders")({
   component: OrdersPage,
 });
-
-const paymentLabels: Record<string, string> = {
-  paid: "Pagado",
-  pending: "Pendiente",
-  failed: "Fallido",
-  refunded: "Reembolsado",
-};
-
-const paymentColors: Record<string, string> = {
-  paid: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  pending:
-    "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  failed: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  refunded: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-};
 
 const deliveryLabels: Record<string, string> = {
   standard: "Estándar",
@@ -190,10 +174,10 @@ function OrdersPage() {
                       {formatCurrency(o.total)}
                     </TableCell>
                     <TableCell>
-                      <Badge className={paymentColors[o.paymentStatus]}>
-                        <CreditCard className="size-3" />
-                        {paymentLabels[o.paymentStatus]}
-                      </Badge>
+                      <StickerDot
+                        color={statusDot[o.paymentStatus]}
+                        label={statusLabel[o.paymentStatus]}
+                      />
                     </TableCell>
                     <TableCell>
                       <Button
@@ -239,10 +223,11 @@ function OrdersPage() {
                 </div>
                 <div className="flex flex-col gap-1 rounded-lg border p-3">
                   <span className="text-xs text-muted-foreground">Pago</span>
-                  <Badge className={`self-start ${paymentColors[selected.paymentStatus]}`}>
-                    <CreditCard className="size-3" />
-                    {paymentLabels[selected.paymentStatus]}
-                  </Badge>
+                  <StickerDot
+                    color={statusDot[selected.paymentStatus]}
+                    label={statusLabel[selected.paymentStatus]}
+                    className="self-start"
+                  />
                 </div>
                 <div className="space-y-1 rounded-lg border p-3">
                   <span className="text-xs text-muted-foreground">Entrega</span>

@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { StickerDot, statusDot, statusLabel } from "@/components/ui/sticker-dot";
 import {
   Dialog,
   DialogContent,
@@ -34,20 +34,6 @@ import {
 export const Route = createFileRoute("/returns")({
   component: ReturnsPage,
 });
-
-const statusLabels: Record<string, string> = {
-  pending: "Pendiente",
-  approved: "Aprobada",
-  rejected: "Rechazada",
-  refunded: "Reembolsada",
-};
-
-const statusColors: Record<string, string> = {
-  pending: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  approved: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-  rejected: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  refunded: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-};
 
 function ReturnsPage() {
   const [returns] = useState<Return[]>(initialReturns);
@@ -153,9 +139,10 @@ function ReturnsPage() {
                     {r.createdAt}
                   </TableCell>
                   <TableCell>
-                    <Badge className={statusColors[r.status]}>
-                      {statusLabels[r.status]}
-                    </Badge>
+                    <StickerDot
+                      color={statusDot[r.status]}
+                      label={statusLabel[r.status]}
+                    />
                   </TableCell>
                   <TableCell>
                     <Button
@@ -207,9 +194,11 @@ function ReturnsPage() {
                 </div>
                 <div className="flex flex-col gap-1 rounded-lg border p-3">
                   <span className="text-xs text-muted-foreground">Estado</span>
-                  <Badge className={`self-start ${statusColors[selected.status]}`}>
-                    {statusLabels[selected.status]}
-                  </Badge>
+                  <StickerDot
+                    color={statusDot[selected.status]}
+                    label={statusLabel[selected.status]}
+                    className="self-start"
+                  />
                 </div>
                 <div className="space-y-1 rounded-lg border p-3">
                   <span className="flex items-center gap-1 text-xs text-muted-foreground">

@@ -56,7 +56,7 @@ export default function Header() {
                 ${
                   location.pathname === to ||
                   location.pathname.startsWith(to + "/")
-                    ? "bg-accent text-accent-foreground"
+                    ? "bg-cube-orange/10 text-cube-orange font-semibold"
                     : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
             >

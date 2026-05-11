@@ -36,15 +36,15 @@ export const Route = createFileRoute("/")({
 });
 
 const stats = [
-  { label: "Productos", value: "128", icon: Package, color: "text-blue-600" },
-  { label: "Categorías", value: "8", icon: Grid3X3, color: "text-emerald-600" },
+  { label: "Productos", value: "128", icon: Package, accent: "border-l-cube-blue" },
+  { label: "Categorías", value: "8", icon: Grid3X3, accent: "border-l-cube-green" },
   {
     label: "Órdenes",
     value: "1,342",
     icon: ShoppingCart,
-    color: "text-orange-600",
+    accent: "border-l-cube-orange",
   },
-  { label: "Clientes", value: "892", icon: Users, color: "text-purple-600" },
+  { label: "Clientes", value: "892", icon: Users, accent: "border-l-cube-yellow" },
 ];
 
 const salesConfig = {
@@ -52,7 +52,7 @@ const salesConfig = {
 } satisfies ChartConfig;
 
 const ordersConfig = {
-  orders: { label: "Órdenes", color: "var(--color-chart-1)" },
+  orders: { label: "Órdenes", color: "var(--color-chart-2)" },
 } satisfies ChartConfig;
 
 function Home() {
@@ -62,10 +62,10 @@ function Home() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
-          <Card key={stat.label}>
+          <Card key={stat.label} className={`border-l-4 ${stat.accent}`}>
             <CardHeader className="flex-row items-center justify-between">
               <CardTitle>{stat.label}</CardTitle>
-              <stat.icon className={`size-5 ${stat.color}`} />
+              <stat.icon className="size-5 text-muted-foreground/60" />
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-bold">{stat.value}</p>

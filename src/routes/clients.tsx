@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { StickerDot, statusDot, statusLabel } from "@/components/ui/sticker-dot";
 import {
   Dialog,
   DialogContent,
@@ -35,7 +35,6 @@ import {
   Calendar,
   ShoppingCart,
   Package,
-  CreditCard,
   Hash,
   DollarSign,
 } from "lucide-react";
@@ -43,20 +42,6 @@ import {
 export const Route = createFileRoute("/clients")({
   component: ClientsPage,
 });
-
-const paymentLabels: Record<string, string> = {
-  paid: "Pagado",
-  pending: "Pendiente",
-  failed: "Fallido",
-  refunded: "Reembolsado",
-};
-
-const paymentColors: Record<string, string> = {
-  paid: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-  pending: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-  failed: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
-  refunded: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-};
 
 function formatCurrency(n: number) {
   return `$${n.toFixed(2)}`;
@@ -179,15 +164,10 @@ function ClientsPage() {
                       {c.createdAt}
                     </TableCell>
                     <TableCell>
-                      <Badge
-                        className={
-                          c.status === "active"
-                            ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
-                            : "bg-muted text-muted-foreground"
-                        }
-                      >
-                        {c.status === "active" ? "Activo" : "Inactivo"}
-                      </Badge>
+                      <StickerDot
+                        color={statusDot[c.status]}
+                        label={statusLabel[c.status]}
+                      />
                     </TableCell>
                     <TableCell>
                       <Button
@@ -261,7 +241,10 @@ function ClientsPage() {
                   <div className="space-y-1 rounded-lg border p-3">
                     <span className="text-xs text-muted-foreground">Estado</span>
                     <p className="text-sm font-medium">
-                      {selected.status === "active" ? "Activo" : "Inactivo"}
+                      <StickerDot
+                        color={statusDot[selected.status]}
+                        label={statusLabel[selected.status]}
+                      />
                     </p>
                   </div>
                   <div className="space-y-1 rounded-lg border p-3 col-span-2">
@@ -306,10 +289,10 @@ function ClientsPage() {
                                 {formatCurrency(o.total)}
                               </TableCell>
                               <TableCell>
-                                <Badge className={paymentColors[o.paymentStatus]}>
-                                  <CreditCard className="size-3" />
-                                  {paymentLabels[o.paymentStatus]}
-                                </Badge>
+                                <StickerDot
+                                  color={statusDot[o.paymentStatus]}
+                                  label={statusLabel[o.paymentStatus]}
+                                />
                               </TableCell>
                             </TableRow>
                           ))}
