@@ -8,144 +8,144 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as ReturnsRouteImport } from './routes/returns'
-import { Route as ProductsRouteImport } from './routes/products'
-import { Route as OrdersRouteImport } from './routes/orders'
-import { Route as ClientsRouteImport } from './routes/clients'
-import { Route as CategoriesRouteImport } from './routes/categories'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as rootRouteImport } from "./routes/__root";
+import { Route as ReturnsRouteImport } from "./routes/returns";
+import { Route as ProductsRouteImport } from "./routes/products";
+import { Route as OrdersRouteImport } from "./routes/orders";
+import { Route as ClientsRouteImport } from "./routes/clients";
+import { Route as CategoriesRouteImport } from "./routes/categories";
+import { Route as IndexRouteImport } from "./routes/index";
 
 const ReturnsRoute = ReturnsRouteImport.update({
-  id: '/returns',
-  path: '/returns',
+  id: "/returns",
+  path: "/returns",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ProductsRoute = ProductsRouteImport.update({
-  id: '/products',
-  path: '/products',
+  id: "/products",
+  path: "/products",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const OrdersRoute = OrdersRouteImport.update({
-  id: '/orders',
-  path: '/orders',
+  id: "/orders",
+  path: "/orders",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ClientsRoute = ClientsRouteImport.update({
-  id: '/clients',
-  path: '/clients',
+  id: "/clients",
+  path: "/clients",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const CategoriesRoute = CategoriesRouteImport.update({
-  id: '/categories',
-  path: '/categories',
+  id: "/categories",
+  path: "/categories",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+  id: "/",
+  path: "/",
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/categories': typeof CategoriesRoute
-  '/clients': typeof ClientsRoute
-  '/orders': typeof OrdersRoute
-  '/products': typeof ProductsRoute
-  '/returns': typeof ReturnsRoute
+  "/": typeof IndexRoute;
+  "/categories": typeof CategoriesRoute;
+  "/clients": typeof ClientsRoute;
+  "/orders": typeof OrdersRoute;
+  "/products": typeof ProductsRoute;
+  "/returns": typeof ReturnsRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/categories': typeof CategoriesRoute
-  '/clients': typeof ClientsRoute
-  '/orders': typeof OrdersRoute
-  '/products': typeof ProductsRoute
-  '/returns': typeof ReturnsRoute
+  "/": typeof IndexRoute;
+  "/categories": typeof CategoriesRoute;
+  "/clients": typeof ClientsRoute;
+  "/orders": typeof OrdersRoute;
+  "/products": typeof ProductsRoute;
+  "/returns": typeof ReturnsRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/categories': typeof CategoriesRoute
-  '/clients': typeof ClientsRoute
-  '/orders': typeof OrdersRoute
-  '/products': typeof ProductsRoute
-  '/returns': typeof ReturnsRoute
+  __root__: typeof rootRouteImport;
+  "/": typeof IndexRoute;
+  "/categories": typeof CategoriesRoute;
+  "/clients": typeof ClientsRoute;
+  "/orders": typeof OrdersRoute;
+  "/products": typeof ProductsRoute;
+  "/returns": typeof ReturnsRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
-    | '/'
-    | '/categories'
-    | '/clients'
-    | '/orders'
-    | '/products'
-    | '/returns'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/categories' | '/clients' | '/orders' | '/products' | '/returns'
+    | "/"
+    | "/categories"
+    | "/clients"
+    | "/orders"
+    | "/products"
+    | "/returns";
+  fileRoutesByTo: FileRoutesByTo;
+  to: "/" | "/categories" | "/clients" | "/orders" | "/products" | "/returns";
   id:
-    | '__root__'
-    | '/'
-    | '/categories'
-    | '/clients'
-    | '/orders'
-    | '/products'
-    | '/returns'
-  fileRoutesById: FileRoutesById
+    | "__root__"
+    | "/"
+    | "/categories"
+    | "/clients"
+    | "/orders"
+    | "/products"
+    | "/returns";
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  CategoriesRoute: typeof CategoriesRoute
-  ClientsRoute: typeof ClientsRoute
-  OrdersRoute: typeof OrdersRoute
-  ProductsRoute: typeof ProductsRoute
-  ReturnsRoute: typeof ReturnsRoute
+  IndexRoute: typeof IndexRoute;
+  CategoriesRoute: typeof CategoriesRoute;
+  ClientsRoute: typeof ClientsRoute;
+  OrdersRoute: typeof OrdersRoute;
+  ProductsRoute: typeof ProductsRoute;
+  ReturnsRoute: typeof ReturnsRoute;
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/returns': {
-      id: '/returns'
-      path: '/returns'
-      fullPath: '/returns'
-      preLoaderRoute: typeof ReturnsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/products': {
-      id: '/products'
-      path: '/products'
-      fullPath: '/products'
-      preLoaderRoute: typeof ProductsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/orders': {
-      id: '/orders'
-      path: '/orders'
-      fullPath: '/orders'
-      preLoaderRoute: typeof OrdersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/clients': {
-      id: '/clients'
-      path: '/clients'
-      fullPath: '/clients'
-      preLoaderRoute: typeof ClientsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/categories': {
-      id: '/categories'
-      path: '/categories'
-      fullPath: '/categories'
-      preLoaderRoute: typeof CategoriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+    "/returns": {
+      id: "/returns";
+      path: "/returns";
+      fullPath: "/returns";
+      preLoaderRoute: typeof ReturnsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/products": {
+      id: "/products";
+      path: "/products";
+      fullPath: "/products";
+      preLoaderRoute: typeof ProductsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/orders": {
+      id: "/orders";
+      path: "/orders";
+      fullPath: "/orders";
+      preLoaderRoute: typeof OrdersRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/clients": {
+      id: "/clients";
+      path: "/clients";
+      fullPath: "/clients";
+      preLoaderRoute: typeof ClientsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/categories": {
+      id: "/categories";
+      path: "/categories";
+      fullPath: "/categories";
+      preLoaderRoute: typeof CategoriesRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    "/": {
+      id: "/";
+      path: "/";
+      fullPath: "/";
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
   }
 }
 
@@ -156,7 +156,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrdersRoute: OrdersRoute,
   ProductsRoute: ProductsRoute,
   ReturnsRoute: ReturnsRoute,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();

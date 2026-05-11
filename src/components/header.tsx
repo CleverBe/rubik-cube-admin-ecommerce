@@ -1,19 +1,29 @@
-import { Link, useLocation } from '@tanstack/react-router'
-import { useTheme } from '@/components/theme-provider'
-import { Button } from '@/components/ui/button'
-import { Sun, Moon, Bell, User, Package, Grid3X3, ShoppingCart, Users, RotateCcw } from 'lucide-react'
+import { Link, useLocation } from "@tanstack/react-router";
+import { useTheme } from "@/components/theme-provider";
+import { Button } from "@/components/ui/button";
+import {
+  Sun,
+  Moon,
+  Bell,
+  User,
+  Package,
+  Grid3X3,
+  ShoppingCart,
+  Users,
+  RotateCcw,
+} from "lucide-react";
 
 const links = [
-  { to: '/categories', label: 'Categorías', icon: Grid3X3 },
-  { to: '/products', label: 'Productos', icon: Package },
-  { to: '/orders', label: 'Órdenes', icon: ShoppingCart },
-  { to: '/clients', label: 'Clientes', icon: Users },
-  { to: '/returns', label: 'Devoluciones', icon: RotateCcw },
-]
+  { to: "/categories", label: "Categorías", icon: Grid3X3 },
+  { to: "/products", label: "Productos", icon: Package },
+  { to: "/orders", label: "Órdenes", icon: ShoppingCart },
+  { to: "/clients", label: "Clientes", icon: Users },
+  { to: "/returns", label: "Devoluciones", icon: RotateCcw },
+];
 
 export default function Header() {
-  const { theme, toggleTheme } = useTheme()
-  const location = useLocation()
+  const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
@@ -28,9 +38,11 @@ export default function Header() {
               key={to}
               to={to}
               className={`inline-flex items-center gap-1.5 h-8 px-2.5 rounded-md text-sm font-medium transition-colors
-                ${location.pathname === to || location.pathname.startsWith(to + '/')
-                  ? 'bg-accent text-accent-foreground'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                ${
+                  location.pathname === to ||
+                  location.pathname.startsWith(to + "/")
+                    ? "bg-accent text-accent-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
             >
               <Icon className="size-4" />
@@ -40,8 +52,17 @@ export default function Header() {
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
-          <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Cambiar tema">
-            {theme === 'light' ? <Moon className="size-4" /> : <Sun className="size-4" />}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleTheme}
+            aria-label="Cambiar tema"
+          >
+            {theme === "light" ? (
+              <Moon className="size-4" />
+            ) : (
+              <Sun className="size-4" />
+            )}
           </Button>
           <Button variant="ghost" size="icon" aria-label="Notificaciones">
             <Bell className="size-4" />
@@ -52,5 +73,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

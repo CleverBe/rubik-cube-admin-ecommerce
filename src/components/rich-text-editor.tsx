@@ -1,24 +1,37 @@
-import ReactQuill from 'react-quill-new'
-import 'react-quill-new/dist/quill.snow.css'
+import ReactQuill from "react-quill-new";
+import "react-quill-new/dist/quill.snow.css";
 
 const modules = {
   toolbar: [
     [{ header: [1, 2, 3, false] }],
-    ['bold', 'italic', 'underline', 'strike'],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    ['link', 'clean'],
+    ["bold", "italic", "underline", "strike"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    ["link", "clean"],
   ],
-}
+};
 
-const formats = ['header', 'bold', 'italic', 'underline', 'strike', 'list', 'bullet', 'link']
+const formats = [
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "list",
+  "bullet",
+  "link",
+];
 
 interface RichTextEditorProps {
-  value: string
-  onChange: (value: string) => void
-  placeholder?: string
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
 }
 
-export default function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
+export default function RichTextEditor({
+  value,
+  onChange,
+  placeholder,
+}: RichTextEditorProps) {
   return (
     <div className="[&_.ql-editor]:min-h-[150px] [&_.ql-editor]:text-sm">
       <ReactQuill
@@ -30,5 +43,5 @@ export default function RichTextEditor({ value, onChange, placeholder }: RichTex
         placeholder={placeholder}
       />
     </div>
-  )
+  );
 }
