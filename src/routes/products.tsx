@@ -37,7 +37,17 @@ import {
 import RichTextEditor from "@/components/rich-text-editor";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
-import { Pencil, Trash2, Plus, X, Upload } from "lucide-react";
+import {
+  Pencil,
+  Trash2,
+  Plus,
+  X,
+  Upload,
+  ArrowUpDown,
+  ArrowUp,
+  ArrowDown,
+} from "lucide-react";
+import { useSort } from "@/lib/use-sort";
 
 const NOT_FOUND_IMG = "/images/not_found_image.jpg";
 
@@ -119,6 +129,11 @@ function ProductsPage() {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Product | null>(null);
+  const {
+    sortedData: sortedProducts,
+    sortConfig,
+    toggleSort,
+  } = useSort(products, "name");
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -264,17 +279,97 @@ function ProductsPage() {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-12">Imagen</TableHead>
-                <TableHead>Nombre</TableHead>
-                <TableHead>SKU</TableHead>
+                <TableHead>
+                  <button
+                    className="inline-flex items-center gap-1 font-medium"
+                    onClick={() => toggleSort("name")}
+                  >
+                    Nombre
+                    {sortConfig.key === "name" ? (
+                      sortConfig.direction === "asc" ? (
+                        <ArrowUp className="size-4" />
+                      ) : (
+                        <ArrowDown className="size-4" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="size-4" />
+                    )}
+                  </button>
+                </TableHead>
+                <TableHead>
+                  <button
+                    className="inline-flex items-center gap-1 font-medium"
+                    onClick={() => toggleSort("sku")}
+                  >
+                    SKU
+                    {sortConfig.key === "sku" ? (
+                      sortConfig.direction === "asc" ? (
+                        <ArrowUp className="size-4" />
+                      ) : (
+                        <ArrowDown className="size-4" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="size-4" />
+                    )}
+                  </button>
+                </TableHead>
                 <TableHead>Categoría</TableHead>
-                <TableHead>Precio</TableHead>
-                <TableHead>Stock</TableHead>
-                <TableHead>Actualizado</TableHead>
+                <TableHead>
+                  <button
+                    className="inline-flex items-center gap-1 font-medium"
+                    onClick={() => toggleSort("price")}
+                  >
+                    Precio
+                    {sortConfig.key === "price" ? (
+                      sortConfig.direction === "asc" ? (
+                        <ArrowUp className="size-4" />
+                      ) : (
+                        <ArrowDown className="size-4" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="size-4" />
+                    )}
+                  </button>
+                </TableHead>
+                <TableHead>
+                  <button
+                    className="inline-flex items-center gap-1 font-medium"
+                    onClick={() => toggleSort("stock")}
+                  >
+                    Stock
+                    {sortConfig.key === "stock" ? (
+                      sortConfig.direction === "asc" ? (
+                        <ArrowUp className="size-4" />
+                      ) : (
+                        <ArrowDown className="size-4" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="size-4" />
+                    )}
+                  </button>
+                </TableHead>
+                <TableHead>
+                  <button
+                    className="inline-flex items-center gap-1 font-medium"
+                    onClick={() => toggleSort("updatedAt")}
+                  >
+                    Actualizado
+                    {sortConfig.key === "updatedAt" ? (
+                      sortConfig.direction === "asc" ? (
+                        <ArrowUp className="size-4" />
+                      ) : (
+                        <ArrowDown className="size-4" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="size-4" />
+                    )}
+                  </button>
+                </TableHead>
                 <TableHead className="w-20" />
               </TableRow>
             </TableHeader>
             <TableBody>
-              {products.map((p) => (
+              {sortedProducts.map((p) => (
                 <TableRow key={p.id}>
                   <TableCell>
                     <img

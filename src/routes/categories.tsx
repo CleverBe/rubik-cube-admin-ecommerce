@@ -35,7 +35,15 @@ import {
 } from "@/components/ui/select";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import {
+  Pencil,
+  Trash2,
+  Plus,
+  ArrowUpDown,
+  ArrowUp,
+  ArrowDown,
+} from "lucide-react";
+import { useSort } from "@/lib/use-sort";
 
 export const Route = createFileRoute("/categories")({
   component: CategoriesPage,
@@ -53,6 +61,11 @@ function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>(initialCategories);
   const [open, setOpen] = useState(false);
   const [editing, setEditing] = useState<Category | null>(null);
+  const {
+    sortedData: sortedCategories,
+    sortConfig,
+    toggleSort,
+  } = useSort(categories, "name");
 
   const {
     register,
@@ -135,16 +148,48 @@ function CategoriesPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nombre</TableHead>
+                <TableHead>
+                  <button
+                    className="inline-flex items-center gap-1 font-medium"
+                    onClick={() => toggleSort("name")}
+                  >
+                    Nombre
+                    {sortConfig.key === "name" ? (
+                      sortConfig.direction === "asc" ? (
+                        <ArrowUp className="size-4" />
+                      ) : (
+                        <ArrowDown className="size-4" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="size-4" />
+                    )}
+                  </button>
+                </TableHead>
                 <TableHead>Slug</TableHead>
                 <TableHead>Descripción</TableHead>
                 <TableHead>Categoría Padre</TableHead>
-                <TableHead>Actualizado</TableHead>
+                <TableHead>
+                  <button
+                    className="inline-flex items-center gap-1 font-medium"
+                    onClick={() => toggleSort("updatedAt")}
+                  >
+                    Actualizado
+                    {sortConfig.key === "updatedAt" ? (
+                      sortConfig.direction === "asc" ? (
+                        <ArrowUp className="size-4" />
+                      ) : (
+                        <ArrowDown className="size-4" />
+                      )
+                    ) : (
+                      <ArrowUpDown className="size-4" />
+                    )}
+                  </button>
+                </TableHead>
                 <TableHead className="w-20" />
               </TableRow>
             </TableHeader>
             <TableBody>
-              {categories.map((cat) => (
+              {sortedCategories.map((cat) => (
                 <TableRow key={cat.id}>
                   <TableCell className="font-medium">{cat.name}</TableCell>
                   <TableCell className="text-muted-foreground">
