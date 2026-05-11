@@ -107,6 +107,442 @@ export const categories: Category[] = [
   },
 ];
 
+export interface OrderItem {
+  productId: string;
+  productName: string;
+  productImage: string;
+  sku: string;
+  quantity: number;
+  unitPrice: number;
+}
+
+export interface Order {
+  id: string;
+  orderNumber: string;
+  clientId: string;
+  clientName: string;
+  items: OrderItem[];
+  total: number;
+  paymentStatus: "paid" | "pending" | "failed" | "refunded";
+  deliveryType: "standard" | "express" | "pickup";
+  shippingAddress: string;
+  createdAt: string;
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  avatar: string;
+  address: string;
+  status: "active" | "inactive";
+  createdAt: string;
+}
+
+export const clients: Client[] = [
+  {
+    id: "c001",
+    name: "Carlos Mendoza",
+    email: "carlos.mendoza@email.com",
+    phone: "+52 55 1234 5678",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Carlos",
+    address: "Av. Reforma 123, Col. Centro, CDMX, 06000, México",
+    status: "active",
+    createdAt: "2024-08-15",
+  },
+  {
+    id: "c002",
+    name: "María García",
+    email: "maria.garcia@email.com",
+    phone: "+52 33 9876 5432",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Maria",
+    address: "Calle Vallarta 456, Col. Americana, Guadalajara, 44100, México",
+    status: "active",
+    createdAt: "2024-09-02",
+  },
+  {
+    id: "c003",
+    name: "Alejandro Ruiz",
+    email: "alejandro.ruiz@email.com",
+    phone: "+52 81 2345 6789",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Alejandro",
+    address: "Av. Constitución 789, Col. Centro, Monterrey, 64000, México",
+    status: "active",
+    createdAt: "2024-10-20",
+  },
+  {
+    id: "c004",
+    name: "Sofía Torres",
+    email: "sofia.torres@email.com",
+    phone: "+52 55 8765 4321",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Sofia",
+    address: "Insurgentes Sur 321, Col. Del Valle, CDMX, 03100, México",
+    status: "inactive",
+    createdAt: "2024-06-10",
+  },
+  {
+    id: "c005",
+    name: "Diego Hernández",
+    email: "diego.hernandez@email.com",
+    phone: "+52 999 345 6789",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Diego",
+    address: "Calle 60 234, Col. Itzimná, Mérida, 97100, México",
+    status: "active",
+    createdAt: "2025-01-05",
+  },
+  {
+    id: "c006",
+    name: "Ana Martínez",
+    email: "ana.martinez@email.com",
+    phone: "+52 81 5678 9012",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Ana",
+    address: "Av. Vasconcelos 567, Col. Residencial San Agustín, Monterrey, 66260, México",
+    status: "active",
+    createdAt: "2024-11-18",
+  },
+  {
+    id: "c007",
+    name: "Roberto López",
+    email: "roberto.lopez@email.com",
+    phone: "+52 33 1111 2222",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Roberto",
+    address: "Av. Chapultepec 890, Col. Providencia, Guadalajara, 44630, México",
+    status: "active",
+    createdAt: "2025-02-28",
+  },
+  {
+    id: "c008",
+    name: "Valentina Castro",
+    email: "valentina.castro@email.com",
+    phone: "+52 55 4444 5555",
+    avatar: "https://api.dicebear.com/9.x/avataaars/svg?seed=Valentina",
+    address: "Av. Universidad 654, Col. Narvarte, CDMX, 03020, México",
+    status: "inactive",
+    createdAt: "2024-07-22",
+  },
+];
+
+export const orders: Order[] = [
+  {
+    id: "o001",
+    orderNumber: "OC-2026-001",
+    clientId: "c001",
+    clientName: "Carlos Mendoza",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000001", productName: "CubeSpeed Pro X3", productImage: "/images/products/CubeSpeed_Pro_X3.webp", sku: "CSP-X3-001", quantity: 2, unitPrice: 34.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000008", productName: "Cube Lube Premium", productImage: "/images/products/Cube_Lube_Premium.webp", sku: "CL-PRM-001", quantity: 1, unitPrice: 12.99 },
+    ],
+    total: 82.97,
+    paymentStatus: "paid",
+    deliveryType: "express",
+    shippingAddress: "Av. Reforma 123, Col. Centro, CDMX, 06000, México",
+    createdAt: "2026-04-01",
+  },
+  {
+    id: "o002",
+    orderNumber: "OC-2026-002",
+    clientId: "c002",
+    clientName: "María García",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000003", productName: "CubeX 2x2 Magnetic", productImage: "/images/products/CubeX_2x2_Magnetic.jpg", sku: "CX-2M-001", quantity: 1, unitPrice: 18.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000004", productName: "Budget Cube 3x3", productImage: "/images/products/Budget_Cube_3x3.jpg", sku: "BC-33-001", quantity: 3, unitPrice: 8.99 },
+    ],
+    total: 45.96,
+    paymentStatus: "paid",
+    deliveryType: "standard",
+    shippingAddress: "Calle Vallarta 456, Col. Americana, Guadalajara, 44100, México",
+    createdAt: "2026-04-03",
+  },
+  {
+    id: "o003",
+    orderNumber: "OC-2026-003",
+    clientId: "c003",
+    clientName: "Alejandro Ruiz",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000005", productName: "BigCube 4x4 M", productImage: "/images/products/BigCube_4x4 M.jpg", sku: "BC-4M-001", quantity: 1, unitPrice: 29.99 },
+    ],
+    total: 29.99,
+    paymentStatus: "pending",
+    deliveryType: "standard",
+    shippingAddress: "Av. Constitución 789, Col. Centro, Monterrey, 64000, México",
+    createdAt: "2026-04-05",
+  },
+  {
+    id: "o004",
+    orderNumber: "OC-2026-004",
+    clientId: "c004",
+    clientName: "Sofía Torres",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000006", productName: "PyraMaster X", productImage: "/images/products/PyraMaster_X.webp", sku: "PM-X-001", quantity: 1, unitPrice: 15.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000007", productName: "MegaStar Megaminx", productImage: "/images/products/MegaStar_Megaminx.png", sku: "MS-MG-001", quantity: 1, unitPrice: 22.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000010", productName: "SpeedCube Stand", productImage: "/images/products/SpeedCube_Stand.webp", sku: "SCS-001", quantity: 2, unitPrice: 9.99 },
+    ],
+    total: 58.96,
+    paymentStatus: "paid",
+    deliveryType: "express",
+    shippingAddress: "Insurgentes Sur 321, Col. Del Valle, CDMX, 03100, México",
+    createdAt: "2026-04-07",
+  },
+  {
+    id: "o005",
+    orderNumber: "OC-2026-005",
+    clientId: "c005",
+    clientName: "Diego Hernández",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000002", productName: "SpeedCube RS3 2025", productImage: "/images/products/SpeedCube_RS3_2025.jpg", sku: "SC-RS3-2025", quantity: 1, unitPrice: 24.99 },
+    ],
+    total: 24.99,
+    paymentStatus: "paid",
+    deliveryType: "pickup",
+    shippingAddress: "Calle 60 234, Col. Itzimná, Mérida, 97100, México",
+    createdAt: "2026-04-10",
+  },
+  {
+    id: "o006",
+    orderNumber: "OC-2026-006",
+    clientId: "c001",
+    clientName: "Carlos Mendoza",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000004", productName: "Budget Cube 3x3", productImage: "/images/products/Budget_Cube_3x3.jpg", sku: "BC-33-001", quantity: 5, unitPrice: 8.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000010", productName: "SpeedCube Stand", productImage: "/images/products/SpeedCube_Stand.webp", sku: "SCS-001", quantity: 2, unitPrice: 9.99 },
+    ],
+    total: 64.93,
+    paymentStatus: "paid",
+    deliveryType: "standard",
+    shippingAddress: "Av. Reforma 123, Col. Centro, CDMX, 06000, México",
+    createdAt: "2026-04-12",
+  },
+  {
+    id: "o007",
+    orderNumber: "OC-2026-007",
+    clientId: "c006",
+    clientName: "Ana Martínez",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000001", productName: "CubeSpeed Pro X3", productImage: "/images/products/CubeSpeed_Pro_X3.webp", sku: "CSP-X3-001", quantity: 1, unitPrice: 34.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000008", productName: "Cube Lube Premium", productImage: "/images/products/Cube_Lube_Premium.webp", sku: "CL-PRM-001", quantity: 3, unitPrice: 12.99 },
+    ],
+    total: 73.96,
+    paymentStatus: "paid",
+    deliveryType: "express",
+    shippingAddress: "Av. Vasconcelos 567, Col. Residencial San Agustín, Monterrey, 66260, México",
+    createdAt: "2026-04-15",
+  },
+  {
+    id: "o008",
+    orderNumber: "OC-2026-008",
+    clientId: "c007",
+    clientName: "Roberto López",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000005", productName: "BigCube 4x4 M", productImage: "/images/products/BigCube_4x4 M.jpg", sku: "BC-4M-001", quantity: 2, unitPrice: 29.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000003", productName: "CubeX 2x2 Magnetic", productImage: "/images/products/CubeX_2x2_Magnetic.jpg", sku: "CX-2M-001", quantity: 1, unitPrice: 18.99 },
+    ],
+    total: 78.97,
+    paymentStatus: "pending",
+    deliveryType: "standard",
+    shippingAddress: "Av. Chapultepec 890, Col. Providencia, Guadalajara, 44630, México",
+    createdAt: "2026-04-18",
+  },
+  {
+    id: "o009",
+    orderNumber: "OC-2026-009",
+    clientId: "c008",
+    clientName: "Valentina Castro",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000006", productName: "PyraMaster X", productImage: "/images/products/PyraMaster_X.webp", sku: "PM-X-001", quantity: 2, unitPrice: 15.99 },
+    ],
+    total: 31.98,
+    paymentStatus: "refunded",
+    deliveryType: "standard",
+    shippingAddress: "Av. Universidad 654, Col. Narvarte, CDMX, 03020, México",
+    createdAt: "2026-04-20",
+  },
+  {
+    id: "o010",
+    orderNumber: "OC-2026-010",
+    clientId: "c002",
+    clientName: "María García",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000002", productName: "SpeedCube RS3 2025", productImage: "/images/products/SpeedCube_RS3_2025.jpg", sku: "SC-RS3-2025", quantity: 1, unitPrice: 24.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000007", productName: "MegaStar Megaminx", productImage: "/images/products/MegaStar_Megaminx.png", sku: "MS-MG-001", quantity: 1, unitPrice: 22.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000010", productName: "SpeedCube Stand", productImage: "/images/products/SpeedCube_Stand.webp", sku: "SCS-001", quantity: 1, unitPrice: 9.99 },
+    ],
+    total: 57.97,
+    paymentStatus: "paid",
+    deliveryType: "express",
+    shippingAddress: "Calle Vallarta 456, Col. Americana, Guadalajara, 44100, México",
+    createdAt: "2026-04-22",
+  },
+  {
+    id: "o011",
+    orderNumber: "OC-2026-011",
+    clientId: "c003",
+    clientName: "Alejandro Ruiz",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000001", productName: "CubeSpeed Pro X3", productImage: "/images/products/CubeSpeed_Pro_X3.webp", sku: "CSP-X3-001", quantity: 1, unitPrice: 34.99 },
+    ],
+    total: 34.99,
+    paymentStatus: "failed",
+    deliveryType: "standard",
+    shippingAddress: "Av. Constitución 789, Col. Centro, Monterrey, 64000, México",
+    createdAt: "2026-04-25",
+  },
+  {
+    id: "o012",
+    orderNumber: "OC-2026-012",
+    clientId: "c005",
+    clientName: "Diego Hernández",
+    items: [
+      { productId: "b1c2d3e4-2222-4000-8000-000000000004", productName: "Budget Cube 3x3", productImage: "/images/products/Budget_Cube_3x3.jpg", sku: "BC-33-001", quantity: 10, unitPrice: 8.99 },
+      { productId: "b1c2d3e4-2222-4000-8000-000000000008", productName: "Cube Lube Premium", productImage: "/images/products/Cube_Lube_Premium.webp", sku: "CL-PRM-001", quantity: 2, unitPrice: 12.99 },
+    ],
+    total: 115.88,
+    paymentStatus: "paid",
+    deliveryType: "pickup",
+    shippingAddress: "Calle 60 234, Col. Itzimná, Mérida, 97100, México",
+    createdAt: "2026-04-28",
+  },
+];
+
+export interface Return {
+  id: string;
+  returnNumber: string;
+  orderNumber: string;
+  orderId: string;
+  clientId: string;
+  clientName: string;
+  productName: string;
+  productImage: string;
+  quantity: number;
+  reason: string;
+  status: "pending" | "approved" | "rejected" | "refunded";
+  createdAt: string;
+  resolvedAt: string | null;
+}
+
+export const returns: Return[] = [
+  {
+    id: "r001",
+    returnNumber: "RT-2026-001",
+    orderNumber: "OC-2026-004",
+    orderId: "o004",
+    clientId: "c004",
+    clientName: "Sofía Torres",
+    productName: "PyraMaster X",
+    productImage: "/images/products/PyraMaster_X.webp",
+    quantity: 1,
+    reason: "Producto llegó con un sticker despegado",
+    status: "approved",
+    createdAt: "2026-04-10",
+    resolvedAt: "2026-04-12",
+  },
+  {
+    id: "r002",
+    returnNumber: "RT-2026-002",
+    orderNumber: "OC-2026-009",
+    orderId: "o009",
+    clientId: "c008",
+    clientName: "Valentina Castro",
+    productName: "PyraMaster X",
+    productImage: "/images/products/PyraMaster_X.webp",
+    quantity: 2,
+    reason: "No funciona correctamente, las caras no giran suave",
+    status: "refunded",
+    createdAt: "2026-04-22",
+    resolvedAt: "2026-04-25",
+  },
+  {
+    id: "r003",
+    returnNumber: "RT-2026-003",
+    orderNumber: "OC-2026-008",
+    orderId: "o008",
+    clientId: "c007",
+    clientName: "Roberto López",
+    productName: "BigCube 4x4 M",
+    productImage: "/images/products/BigCube_4x4 M.jpg",
+    quantity: 1,
+    reason: "El cubo llegó con un centro roto",
+    status: "pending",
+    createdAt: "2026-04-20",
+    resolvedAt: null,
+  },
+  {
+    id: "r004",
+    returnNumber: "RT-2026-004",
+    orderNumber: "OC-2026-001",
+    orderId: "o001",
+    clientId: "c001",
+    clientName: "Carlos Mendoza",
+    productName: "Cube Lube Premium",
+    productImage: "/images/products/Cube_Lube_Premium.webp",
+    quantity: 1,
+    reason: "El lubricante llegó abierto y derramado",
+    status: "pending",
+    createdAt: "2026-04-05",
+    resolvedAt: null,
+  },
+  {
+    id: "r005",
+    returnNumber: "RT-2026-005",
+    orderNumber: "OC-2026-007",
+    orderId: "o007",
+    clientId: "c006",
+    clientName: "Ana Martínez",
+    productName: "Cube Lube Premium",
+    productImage: "/images/products/Cube_Lube_Premium.webp",
+    quantity: 2,
+    reason: "Pedí 3 unidades pero solo llegaron 2",
+    status: "approved",
+    createdAt: "2026-04-17",
+    resolvedAt: "2026-04-19",
+  },
+  {
+    id: "r006",
+    returnNumber: "RT-2026-006",
+    orderNumber: "OC-2026-011",
+    orderId: "o011",
+    clientId: "c003",
+    clientName: "Alejandro Ruiz",
+    productName: "CubeSpeed Pro X3",
+    productImage: "/images/products/CubeSpeed_Pro_X3.webp",
+    quantity: 1,
+    reason: "No me gustó el color, quiero otro modelo",
+    status: "rejected",
+    createdAt: "2026-04-27",
+    resolvedAt: "2026-04-28",
+  },
+  {
+    id: "r007",
+    returnNumber: "RT-2026-007",
+    orderNumber: "OC-2026-002",
+    orderId: "o002",
+    clientId: "c002",
+    clientName: "María García",
+    productName: "Budget Cube 3x3",
+    productImage: "/images/products/Budget_Cube_3x3.jpg",
+    quantity: 1,
+    reason: "El cubo llegó rayado en varias caras",
+    status: "pending",
+    createdAt: "2026-04-08",
+    resolvedAt: null,
+  },
+  {
+    id: "r008",
+    returnNumber: "RT-2026-008",
+    orderNumber: "OC-2026-003",
+    orderId: "o003",
+    clientId: "c003",
+    clientName: "Alejandro Ruiz",
+    productName: "BigCube 4x4 M",
+    productImage: "/images/products/BigCube_4x4 M.jpg",
+    quantity: 1,
+    reason: "Cambié de opinión, ya no lo quiero",
+    status: "refunded",
+    createdAt: "2026-04-09",
+    resolvedAt: "2026-04-11",
+  },
+];
+
 export const products: Product[] = [
   {
     id: "b1c2d3e4-2222-4000-8000-000000000001",
