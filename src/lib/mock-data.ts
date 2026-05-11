@@ -107,6 +107,22 @@ export const categories: Category[] = [
   },
 ];
 
+export const monthlySales = [
+  { month: "Nov", sales: 4200, orders: 28 },
+  { month: "Dic", sales: 5800, orders: 35 },
+  { month: "Ene", sales: 3900, orders: 22 },
+  { month: "Feb", sales: 5100, orders: 30 },
+  { month: "Mar", sales: 6700, orders: 38 },
+  { month: "Abr", sales: 4900, orders: 26 },
+];
+
+export const orderStatusStats = [
+  { name: "Pagadas", value: 8, color: "#22c55e" },
+  { name: "Pendientes", value: 2, color: "#f59e0b" },
+  { name: "Fallidas", value: 1, color: "#ef4444" },
+  { name: "Reembolsadas", value: 1, color: "#3b82f6" },
+];
+
 export interface OrderItem {
   productId: string;
   productName: string;
