@@ -205,8 +205,8 @@ function OrdersPage() {
             </DialogTitle>
           </DialogHeader>
           {selected && (
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
+            <div className="space-y-4 max-h-[75dvh] overflow-y-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1 rounded-lg border p-3">
                   <span className="text-xs text-muted-foreground">Cliente</span>
                   <p className="text-sm font-medium">{selected.clientName}</p>
@@ -235,11 +235,11 @@ function OrdersPage() {
                     {deliveryLabels[selected.deliveryType]}
                   </p>
                 </div>
-                <div className="space-y-1 rounded-lg border p-3 col-span-2">
+                <div className="space-y-1 rounded-lg border p-3 sm:col-span-2">
                   <span className="flex items-center gap-1 text-xs text-muted-foreground">
                     <MapPin className="size-3" /> Dirección de envío
                   </span>
-                  <p className="text-sm">{selected.shippingAddress}</p>
+                  <p className="text-sm wrap-break-word">{selected.shippingAddress}</p>
                 </div>
               </div>
 
@@ -249,7 +249,7 @@ function OrdersPage() {
                   {selected.items.length})
                 </h4>
                 <div className="rounded-lg border">
-                  <Table>
+                  <Table className="min-w-150">
                     <TableHeader>
                       <TableRow>
                         <TableHead>Producto</TableHead>
@@ -262,15 +262,17 @@ function OrdersPage() {
                     <TableBody>
                       {selected.items.map((item, i) => (
                         <TableRow key={i}>
-                          <TableCell className="flex items-center gap-2">
-                            <img
-                              src={item.productImage}
-                              alt={item.productName}
-                              className="size-9 rounded object-cover border"
-                            />
-                            <span className="font-medium text-sm">
-                              {item.productName}
-                            </span>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <img
+                                src={item.productImage}
+                                alt={item.productName}
+                                className="size-9 shrink-0 rounded object-cover border"
+                              />
+                              <span className="font-medium text-sm">
+                                {item.productName}
+                              </span>
+                            </div>
                           </TableCell>
                           <TableCell className="font-mono text-xs text-muted-foreground">
                             {item.sku}

@@ -195,7 +195,7 @@ function CategoriesPage() {
                   <TableCell className="text-muted-foreground">
                     {cat.slug}
                   </TableCell>
-                  <TableCell className="text-muted-foreground max-w-[200px] truncate">
+                  <TableCell className="text-muted-foreground max-w-50 truncate">
                     {cat.description}
                   </TableCell>
                   <TableCell>

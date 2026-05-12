@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { useTheme } from "@/components/theme-provider";
 import { Button } from "@/components/ui/button";
@@ -25,6 +26,8 @@ import {
   AlertTriangle,
   CreditCard,
   Clock,
+  Menu,
+  X,
 } from "lucide-react";
 
 const links = [
@@ -38,16 +41,27 @@ const links = [
 export default function Header() {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="flex h-14 items-center gap-2 px-4 max-w-screen-2xl mx-auto">
+      <div className="flex h-14 items-center gap-2 px-4 max-w-screen-2xl mx-auto relative">
         <Link to="/" className="flex items-center gap-2 mr-4 shrink-0">
           <img src="/logo.png" alt="CubeShop" className="h-8 w-auto" />
           <span className="font-heading text-lg font-bold">CubeShop</span>
         </Link>
 
-        <nav className="flex items-center gap-1">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="sm:hidden"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Menú"
+        >
+          {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
+        </Button>
+
+        <nav className="hidden sm:flex items-center gap-1">
           {links.map(({ to, label, icon: Icon }) => (
             <Link
               key={to}
@@ -65,6 +79,33 @@ export default function Header() {
             </Link>
           ))}
         </nav>
+
+        {mobileMenuOpen && (
+          <div className="absolute top-full left-0 right-0 z-50 border-b bg-background p-2 shadow-lg sm:hidden">
+            <nav className="flex flex-col gap-1">
+              {links.map(({ to, label, icon: Icon }) => {
+                const isActive =
+                  location.pathname === to ||
+                  location.pathname.startsWith(to + "/");
+                return (
+                  <Link
+                    key={to}
+                    to={to}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                      isActive
+                        ? "bg-cube-orange/10 text-cube-orange font-semibold"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    }`}
+                  >
+                    <Icon className="size-4" />
+                    {label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </div>
+        )}
 
         <div className="ml-auto flex items-center gap-1">
           <Button
